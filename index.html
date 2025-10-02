@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>idOS Ecosystem Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .options label {
+      display: block;
+      padding: 8px;
+      margin: 5px 0;
+      background: #ecf0f1;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .options label:hover {
+      background: #dfe6e9;
+    }
+    button {
+      padding: 10px 20px;
+      background: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>idOS Ecosystem Quiz</h1>
+  <div class="quiz-container" id="quiz"></div>
+  <button onclick="submitQuiz()">Submit</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What is the core mission of idOS as stated on the Ecosystem page?",
+        options: ["A) To build a new centralized identity system", "B) To support proof‑of‑stake networks only", "C) To enable identity portability for the stablecoin economy", "D) To compete with major social media platforms"],
+        answer: "C"
+      },
+      {
+        question: "Which of the following is not listed as a “Chain” in the idOS ecosystem?",
+        options: ["A) Ethereum", "B) Stellar", "C) Polkadot", "D) Aleph Zero"],
+        answer: "C"
+      },
+      {
+        question: "Which blockchain in idOS ecosystem is described as a privacy‑enhancing Layer 1 with instant finality?",
+        options: ["A) Arbitrum", "B) Aleph Zero", "C) Ethereum", "D) Stellar"],
+        answer: "B"
+      },
+      {
+        question: "Which chain is described as focusing on DeFi and scaling Ethereum with many weekly active addresses?",
+        options: ["A) Radix", "B) Arbitrum", "C) Etherlink", "D) NEAR"],
+        answer: "B"
+      },
+      {
+        question: "Which project is listed as a “Building Partner” (not a chain) on the idOS Ecosystem page?",
+        options: ["A) Partisia Blockchain", "B) Circle", "C) XRP Ledger", "D) Radix"],
+        answer: "B"
+      },
+      {
+        question: "Which chain is described as powered by Tezos smart rollups in the idOS ecosystem?",
+        options: ["A) Etherlink", "B) Arbitrum", "C) Stellar", "D) XRP Ledger"],
+        answer: "A"
+      },
+      {
+        question: "What is the primary focus of Kwil in relation to idOS?",
+        options: ["A) A stablecoin issuer", "B) A permissionless SQL database for decentralized internet", "C) A consensus protocol", "D) A decentralized exchange"],
+        answer: "B"
+      },
+      {
+        question: "Which chain is described as combining blockchain with multi‑party computation (MPC) for privacy in idOS ecosystem?",
+        options: ["A) Aleph Zero", "B) Partisia Blockchain", "C) Etherlink", "D) Radix"],
+        answer: "B"
+      },
+      {
+        question: "Which chain aims to improve developer and user experience in DeFi and uses its own programming language “Scrypto”?",
+        options: ["A) Radix", "B) NEAR", "C) Arbitrum", "D) XRP Ledger"],
+        answer: "A"
+      },
+      {
+        question: "Which of these is a “Building Partner” that supplies a stablecoin infrastructure in the idOS ecosystem?",
+        options: ["A) Kwil", "B) Circle", "C) Radix", "D) Arbitrum"],
+        answer: "B"
+      }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    quizData.forEach((q, index) => {
+      const qElem = document.createElement("div");
+      qElem.classList.add("question-block");
+      qElem.innerHTML = `
+        <div class="question">${index+1}. ${q.question}</div>
+        <div class="options">
+          ${q.options.map(opt => 
+            `<label><input type="radio" name="q${index}" value="${opt[0]}"> ${opt}</label>`
+          ).join("")}
+        </div>
+      `;
+      quizContainer.appendChild(qElem);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      quizData.forEach((q, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && selected.value === q.answer) {
+          score++;
+        }
+      });
+      document.getElementById("result").innerText = `You scored ${score} out of ${quizData.length}!`;
+    }
+  </script>
+</body>
+</html>
